@@ -1,0 +1,42 @@
+﻿@model inventoryManagementSystem.Models.supplier
+
+@{
+    ViewBag.Title = "SupplierDetail";
+}
+
+<h2>SupplierDetail</h2>
+
+<div>
+    <h4>supplier</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayName("Supplier Name")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.supplier_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Supplier Number")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.number)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Supplier Email")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.email)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "UpdateSupplier", "Supplier", new { id = Model.s_id }, new { @class = "btn btn-primary" }) |
+    @Html.ActionLink("Cancel", "DisplaySupplier", "Supplier",new { @class = "btn btn-danger" }) 
+</p>

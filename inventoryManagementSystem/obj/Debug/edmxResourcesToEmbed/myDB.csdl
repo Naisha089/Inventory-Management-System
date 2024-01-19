@@ -1,0 +1,252 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="inventoryDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="category">
+    <Key>
+      <PropertyRef Name="cat_id" />
+    </Key>
+    <Property Name="cat_id" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="cat_name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="cat_status" Type="Byte" Nullable="false" />
+    <NavigationProperty Name="products" Relationship="inventoryDBModel.FK__products__pro_ca__2A4B4B5E" FromRole="category" ToRole="product" />
+  </EntityType>
+  <EntityType Name="role">
+    <Key>
+      <PropertyRef Name="r_id" />
+    </Key>
+    <Property Name="r_id" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="r_name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="r_status" Type="Byte" Nullable="false" />
+    <NavigationProperty Name="users" Relationship="Self.FK__users__u_roleID__08EA5793" FromRole="roles" ToRole="users" />
+  </EntityType>
+  <EntityType Name="user">
+    <Key>
+      <PropertyRef Name="u_id" />
+    </Key>
+    <Property Name="u_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="u_name" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="u_username" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="u_password" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="u_phone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="u_email" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="u_status" Type="Byte" Nullable="false" />
+    <Property Name="u_roleID" Type="Byte" Nullable="false" />
+    <NavigationProperty Name="role" Relationship="Self.FK__users__u_roleID__08EA5793" FromRole="users" ToRole="roles" />
+  </EntityType>
+  <Association Name="FK__users__u_roleID__08EA5793">
+    <End Role="roles" Type="Self.role" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="users" Type="Self.user" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="roles">
+        <PropertyRef Name="r_id" />
+      </Principal>
+      <Dependent Role="users">
+        <PropertyRef Name="u_roleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="inventoryDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="categories" EntityType="Self.category" />
+    <EntitySet Name="roles" EntityType="Self.role" />
+    <EntitySet Name="users" EntityType="Self.user" />
+    <AssociationSet Name="FK__users__u_roleID__08EA5793" Association="Self.FK__users__u_roleID__08EA5793">
+      <End Role="roles" EntitySet="roles" />
+      <End Role="users" EntitySet="users" />
+    </AssociationSet>
+    <FunctionImport Name="st_getLoginDetails" ReturnType="Collection(inventoryDBModel.st_getLoginDetails_Result)">
+      <Parameter Name="user" Mode="In" Type="String" />
+      <Parameter Name="pass" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="st_getLoginDetails1" ReturnType="Collection(inventoryDBModel.st_getLoginDetails1_Result)">
+      <Parameter Name="user" Mode="In" Type="String" />
+      <Parameter Name="pass" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="st_getLoginDetails2" ReturnType="Collection(inventoryDBModel.st_getLoginDetails2_Result)">
+      <Parameter Name="user" Mode="In" Type="String" />
+      <Parameter Name="pass" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="st_getLoginDetails3" ReturnType="Collection(inventoryDBModel.st_getLoginDetails3_Result)">
+      <Parameter Name="user" Mode="In" Type="String" />
+      <Parameter Name="pass" Mode="In" Type="String" />
+    </FunctionImport>
+    <EntitySet Name="PIDetails" EntityType="inventoryDBModel.PIDetail" />
+    <EntitySet Name="products" EntityType="inventoryDBModel.product" />
+    <EntitySet Name="purchaseInvoices" EntityType="inventoryDBModel.purchaseInvoice" />
+    <EntitySet Name="supplies" EntityType="inventoryDBModel.supply" />
+    <AssociationSet Name="FK__PIDetails__pid_p__1ED998B2" Association="inventoryDBModel.FK__PIDetails__pid_p__1ED998B2">
+      <End Role="purchaseInvoice" EntitySet="purchaseInvoices" />
+      <End Role="PIDetail" EntitySet="PIDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PIDetails__pid_p__1FCDBCEB" Association="inventoryDBModel.FK__PIDetails__pid_p__1FCDBCEB">
+      <End Role="product" EntitySet="products" />
+      <End Role="PIDetail" EntitySet="PIDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK__purchaseI__pi_su__1A14E395" Association="inventoryDBModel.FK__purchaseI__pi_su__1A14E395">
+      <End Role="supply" EntitySet="supplies" />
+      <End Role="purchaseInvoice" EntitySet="purchaseInvoices" />
+    </AssociationSet>
+    <EntitySet Name="stocks" EntityType="inventoryDBModel.stock" />
+    <AssociationSet Name="FK__stocks__st_proID__286302EC" Association="inventoryDBModel.FK__stocks__st_proID__286302EC">
+      <End Role="product" EntitySet="products" />
+      <End Role="stock" EntitySet="stocks" />
+    </AssociationSet>
+    <AssociationSet Name="FK__stocks__st_purch__29572725" Association="inventoryDBModel.FK__stocks__st_purch__29572725">
+      <End Role="purchaseInvoice" EntitySet="purchaseInvoices" />
+      <End Role="stock" EntitySet="stocks" />
+    </AssociationSet>
+    <AssociationSet Name="FK__products__pro_ca__2A4B4B5E" Association="inventoryDBModel.FK__products__pro_ca__2A4B4B5E">
+      <End Role="category" EntitySet="categories" />
+      <End Role="product" EntitySet="products" />
+    </AssociationSet>
+  </EntityContainer>
+  <ComplexType Name="st_getLoginDetails_Result">
+    <Property Type="String" Name="UserName" Nullable="false" MaxLength="40" />
+    <Property Type="String" Name="Password" Nullable="false" MaxLength="20" />
+  </ComplexType>
+  <ComplexType Name="st_getLoginDetails1_Result">
+    <Property Type="String" Name="UserName" Nullable="false" MaxLength="40" />
+    <Property Type="String" Name="Password" Nullable="false" MaxLength="20" />
+  </ComplexType>
+  <ComplexType Name="st_getLoginDetails2_Result">
+    <Property Type="String" Name="UserName" Nullable="false" MaxLength="40" />
+    <Property Type="String" Name="Password" Nullable="false" MaxLength="20" />
+  </ComplexType>
+  <ComplexType Name="st_getLoginDetails3_Result">
+    <Property Type="String" Name="UserName" Nullable="false" MaxLength="40" />
+    <Property Type="String" Name="Password" Nullable="false" MaxLength="20" />
+  </ComplexType>
+  <EntityType Name="PIDetail">
+    <Key>
+      <PropertyRef Name="pid_id" />
+    </Key>
+    <Property Name="pid_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="pid_purchaseID" Type="Int64" Nullable="false" />
+    <Property Name="pid_proID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="purchaseInvoice" Relationship="inventoryDBModel.FK__PIDetails__pid_p__1ED998B2" FromRole="PIDetail" ToRole="purchaseInvoice" />
+    <NavigationProperty Name="product" Relationship="inventoryDBModel.FK__PIDetails__pid_p__1FCDBCEB" FromRole="PIDetail" ToRole="product" />
+  </EntityType>
+  <EntityType Name="product">
+    <Key>
+      <PropertyRef Name="pro_id" />
+    </Key>
+    <Property Name="pro_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="pro_name" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="pro_barcode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_expiryDate" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="PIDetails" Relationship="inventoryDBModel.FK__PIDetails__pid_p__1FCDBCEB" FromRole="product" ToRole="PIDetail" />
+    <NavigationProperty Name="stocks" Relationship="inventoryDBModel.FK__stocks__st_proID__286302EC" FromRole="product" ToRole="stock" />
+    <Property Name="pro_buyingPrice" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="pro_sellingPrice" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="pro_catID" Type="Byte" Nullable="false" />
+    <NavigationProperty Name="category" Relationship="inventoryDBModel.FK__products__pro_ca__2A4B4B5E" FromRole="product" ToRole="category" />
+  </EntityType>
+  <EntityType Name="purchaseInvoice">
+    <Key>
+      <PropertyRef Name="pi_id" />
+    </Key>
+    <Property Name="pi_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="pi_date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="pi_suppID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="PIDetails" Relationship="inventoryDBModel.FK__PIDetails__pid_p__1ED998B2" FromRole="purchaseInvoice" ToRole="PIDetail" />
+    <NavigationProperty Name="supply" Relationship="inventoryDBModel.FK__purchaseI__pi_su__1A14E395" FromRole="purchaseInvoice" ToRole="supply" />
+    <NavigationProperty Name="stocks" Relationship="inventoryDBModel.FK__stocks__st_purch__29572725" FromRole="purchaseInvoice" ToRole="stock" />
+  </EntityType>
+  <EntityType Name="supply">
+    <Key>
+      <PropertyRef Name="sup_id" />
+    </Key>
+    <Property Name="sup_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="sup_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="sup_address" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="sup_phone" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="sup_openingBalance" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <NavigationProperty Name="purchaseInvoices" Relationship="inventoryDBModel.FK__purchaseI__pi_su__1A14E395" FromRole="supply" ToRole="purchaseInvoice" />
+  </EntityType>
+  <Association Name="FK__PIDetails__pid_p__1ED998B2">
+    <End Type="inventoryDBModel.purchaseInvoice" Role="purchaseInvoice" Multiplicity="1" />
+    <End Type="inventoryDBModel.PIDetail" Role="PIDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="purchaseInvoice">
+        <PropertyRef Name="pi_id" />
+      </Principal>
+      <Dependent Role="PIDetail">
+        <PropertyRef Name="pid_purchaseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PIDetails__pid_p__1FCDBCEB">
+    <End Type="inventoryDBModel.product" Role="product" Multiplicity="1" />
+    <End Type="inventoryDBModel.PIDetail" Role="PIDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="product">
+        <PropertyRef Name="pro_id" />
+      </Principal>
+      <Dependent Role="PIDetail">
+        <PropertyRef Name="pid_proID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__purchaseI__pi_su__1A14E395">
+    <End Type="inventoryDBModel.supply" Role="supply" Multiplicity="1" />
+    <End Type="inventoryDBModel.purchaseInvoice" Role="purchaseInvoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="supply">
+        <PropertyRef Name="sup_id" />
+      </Principal>
+      <Dependent Role="purchaseInvoice">
+        <PropertyRef Name="pi_suppID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="stock">
+    <Key>
+      <PropertyRef Name="st_id" />
+    </Key>
+    <Property Name="st_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="st_proID" Type="Int32" Nullable="false" />
+    <Property Name="st_proCartoons" Type="Int32" />
+    <Property Name="st_proPieces" Type="Int32" />
+    <Property Name="st_purchaseInvID" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="product" Relationship="inventoryDBModel.FK__stocks__st_proID__286302EC" FromRole="stock" ToRole="product" />
+    <NavigationProperty Name="purchaseInvoice" Relationship="inventoryDBModel.FK__stocks__st_purch__29572725" FromRole="stock" ToRole="purchaseInvoice" />
+  </EntityType>
+  <Association Name="FK__stocks__st_proID__286302EC">
+    <End Type="inventoryDBModel.product" Role="product" Multiplicity="1" />
+    <End Type="inventoryDBModel.stock" Role="stock" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="product">
+        <PropertyRef Name="pro_id" />
+      </Principal>
+      <Dependent Role="stock">
+        <PropertyRef Name="st_proID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__stocks__st_purch__29572725">
+    <End Type="inventoryDBModel.purchaseInvoice" Role="purchaseInvoice" Multiplicity="1" />
+    <End Type="inventoryDBModel.stock" Role="stock" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="purchaseInvoice">
+        <PropertyRef Name="pi_id" />
+      </Principal>
+      <Dependent Role="stock">
+        <PropertyRef Name="st_purchaseInvID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__products__pro_ca__2A4B4B5E">
+    <End Type="inventoryDBModel.category" Role="category" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="inventoryDBModel.product" Role="product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="category">
+        <PropertyRef Name="cat_id" />
+      </Principal>
+      <Dependent Role="product">
+        <PropertyRef Name="pro_catID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

@@ -1,0 +1,206 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="sdModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="catagory">
+          <Key>
+            <PropertyRef Name="c_id" />
+          </Key>
+          <Property Name="c_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="catagory_name" Type="varchar" MaxLength="128" />
+          <Property Name="supplier_name" Type="varchar" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="purchase">
+          <Key>
+            <PropertyRef Name="pur_id" />
+          </Key>
+          <Property Name="pur_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="purchase_product" Type="varchar" MaxLength="128" />
+          <Property Name="purchase_qnty" Type="varchar" MaxLength="128" />
+          <Property Name="purchase_price" Type="varchar" MaxLength="128" />
+          <Property Name="purchase_amount" Type="varchar" MaxLength="128" />
+          <Property Name="purchase_date" Type="date" />
+        </EntityType>
+        <EntityType Name="revenue">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="purchase_amount" Type="varchar" MaxLength="128" />
+          <Property Name="sale_amount" Type="varchar" MaxLength="128" />
+          <Property Name="revenue" Type="varchar" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="sale">
+          <Key>
+            <PropertyRef Name="sa_id" />
+          </Key>
+          <Property Name="sa_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          
+          <Property Name="sale_qnty" Type="varchar" MaxLength="128" />
+          <Property Name="sale_price" Type="varchar" MaxLength="128" />
+          <Property Name="sale_amount" Type="varchar" MaxLength="128" />
+          <Property Name="sale_date" Type="date" />
+        </EntityType>
+        <EntityType Name="supplier">
+          <Key>
+            <PropertyRef Name="s_id" />
+          </Key>
+          <Property Name="s_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="supplier_name" Type="varchar" MaxLength="128" />
+          <Property Name="number" Type="varchar" MaxLength="128" />
+          <Property Name="email" Type="varchar" MaxLength="128" />
+        </EntityType>
+        <EntityContainer Name="sdModelStoreContainer">
+          <EntitySet Name="catagory" EntityType="Self.catagory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="purchase" EntityType="Self.purchase" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="revenue" EntityType="Self.revenue" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sale" EntityType="Self.sale" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="supplier" EntityType="Self.supplier" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="sdModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="catagory">
+          <Key>
+            <PropertyRef Name="c_id" />
+          </Key>
+          <Property Name="c_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="catagory_name" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="supplier_name" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+        </EntityType>
+   
+        <EntityType Name="purchase">
+          <Key>
+            <PropertyRef Name="pur_id" />
+          </Key>
+          <Property Name="pur_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="purchase_product" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="purchase_qnty" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="purchase_price" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="purchase_amount" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="purchase_date" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="revenue">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="purchase_amount" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="sale_amount" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="revenue1" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="sale">
+          <Key>
+            <PropertyRef Name="sa_id" />
+          </Key>
+          <Property Name="sa_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sale_product" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="sale_qnty" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="sale_price" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="sale_amount" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="sale_date" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="supplier">
+          <Key>
+            <PropertyRef Name="s_id" />
+          </Key>
+          <Property Name="s_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="supplier_name" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="number" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="sdEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="catagories" EntityType="Self.catagory" />
+         
+          <EntitySet Name="purchases" EntityType="Self.purchase" />
+          <EntitySet Name="revenues" EntityType="Self.revenue" />
+          <EntitySet Name="sales" EntityType="Self.sale" />
+          <EntitySet Name="suppliers" EntityType="Self.supplier" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="sdModelStoreContainer" CdmEntityContainer="sdEntities">
+          <EntitySetMapping Name="catagories">
+            <EntityTypeMapping TypeName="sdModel.catagory">
+              <MappingFragment StoreEntitySet="catagory">
+                <ScalarProperty Name="c_id" ColumnName="c_id" />
+                <ScalarProperty Name="catagory_name" ColumnName="catagory_name" />
+                <ScalarProperty Name="supplier_name" ColumnName="supplier_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="purchases">
+            <EntityTypeMapping TypeName="sdModel.purchase">
+              <MappingFragment StoreEntitySet="purchase">
+                <ScalarProperty Name="pur_id" ColumnName="pur_id" />
+                <ScalarProperty Name="purchase_product" ColumnName="purchase_product" />
+                <ScalarProperty Name="purchase_qnty" ColumnName="purchase_qnty" />
+                <ScalarProperty Name="purchase_price" ColumnName="purchase_price" />
+                <ScalarProperty Name="purchase_amount" ColumnName="purchase_amount" />
+                <ScalarProperty Name="purchase_date" ColumnName="purchase_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="revenues">
+            <EntityTypeMapping TypeName="sdModel.revenue">
+              <MappingFragment StoreEntitySet="revenue">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="purchase_amount" ColumnName="purchase_amount" />
+                <ScalarProperty Name="sale_amount" ColumnName="sale_amount" />
+                <ScalarProperty Name="revenue1" ColumnName="revenue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sales">
+            <EntityTypeMapping TypeName="sdModel.sale">
+              <MappingFragment StoreEntitySet="sale">
+                <ScalarProperty Name="sa_id" ColumnName="sa_id" />
+                <ScalarProperty Name="sale_product" ColumnName="sale_product" />
+                <ScalarProperty Name="sale_qnty" ColumnName="sale_qnty" />
+                <ScalarProperty Name="sale_price" ColumnName="sale_price" />
+                <ScalarProperty Name="sale_amount" ColumnName="sale_amount" />
+                <ScalarProperty Name="sale_date" ColumnName="sale_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="suppliers">
+            <EntityTypeMapping TypeName="sdModel.supplier">
+              <MappingFragment StoreEntitySet="supplier">
+                <ScalarProperty Name="s_id" ColumnName="s_id" />
+                <ScalarProperty Name="supplier_name" ColumnName="supplier_name" />
+                <ScalarProperty Name="number" ColumnName="number" />
+                <ScalarProperty Name="email" ColumnName="email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

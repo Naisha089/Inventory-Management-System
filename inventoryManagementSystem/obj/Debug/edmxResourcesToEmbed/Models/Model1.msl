@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="sdModelStoreContainer" CdmEntityContainer="sdEntities">
+    <EntitySetMapping Name="catagories">
+      <EntityTypeMapping TypeName="sdModel.catagory">
+        <MappingFragment StoreEntitySet="catagory">
+          <ScalarProperty Name="c_id" ColumnName="c_id" />
+          <ScalarProperty Name="catagory_name" ColumnName="catagory_name" />
+          <ScalarProperty Name="supplier_name" ColumnName="supplier_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="purchases">
+      <EntityTypeMapping TypeName="sdModel.purchase">
+        <MappingFragment StoreEntitySet="purchase">
+          <ScalarProperty Name="pur_id" ColumnName="pur_id" />
+          <ScalarProperty Name="purchase_product" ColumnName="purchase_product" />
+          <ScalarProperty Name="purchase_qnty" ColumnName="purchase_qnty" />
+          <ScalarProperty Name="purchase_price" ColumnName="purchase_price" />
+          <ScalarProperty Name="purchase_amount" ColumnName="purchase_amount" />
+          <ScalarProperty Name="purchase_date" ColumnName="purchase_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="revenues">
+      <EntityTypeMapping TypeName="sdModel.revenue">
+        <MappingFragment StoreEntitySet="revenue">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="purchase_amount" ColumnName="purchase_amount" />
+          <ScalarProperty Name="sale_amount" ColumnName="sale_amount" />
+          <ScalarProperty Name="revenue1" ColumnName="revenue" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sales">
+      <EntityTypeMapping TypeName="sdModel.sale">
+        <MappingFragment StoreEntitySet="sale">
+          <ScalarProperty Name="sa_id" ColumnName="sa_id" />
+          <ScalarProperty Name="sale_product" ColumnName="sale_product" />
+          <ScalarProperty Name="sale_qnty" ColumnName="sale_qnty" />
+          <ScalarProperty Name="sale_price" ColumnName="sale_price" />
+          <ScalarProperty Name="sale_amount" ColumnName="sale_amount" />
+          <ScalarProperty Name="sale_date" ColumnName="sale_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="suppliers">
+      <EntityTypeMapping TypeName="sdModel.supplier">
+        <MappingFragment StoreEntitySet="supplier">
+          <ScalarProperty Name="s_id" ColumnName="s_id" />
+          <ScalarProperty Name="supplier_name" ColumnName="supplier_name" />
+          <ScalarProperty Name="number" ColumnName="number" />
+          <ScalarProperty Name="email" ColumnName="email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

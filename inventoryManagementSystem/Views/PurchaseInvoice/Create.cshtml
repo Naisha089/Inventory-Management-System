@@ -1,0 +1,59 @@
+﻿
+@{
+    ViewBag.Title = "Create";
+}
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script src="~/Scripts/TableJs.js"></script>
+<link rel="stylesheet" href="~/Content/Site.css"/>
+<h2>Purchase Invoice</h2>
+@using (Html.BeginForm())
+{
+    @Html.Label("Date")<br />
+    <input type="date" id="datePicker" name="datePicker" /><br />
+    @Html.Label("Suppliers")<br />
+    @Html.DropDownList("Supplier", ViewBag.suppList as SelectList)
+
+    <table>
+        <tr>
+            <th>Product</th>
+            <th>Barcode</th>
+            <th>Expiry</th>
+            <th>No.of cartoons</th>
+            <th>per CArtoon quantity</th>
+            <th>Buying price</th>
+
+        </tr>
+        <tr>
+            <td> @Html.Editor("ProductName")</td>
+            <td> @Html.Editor("Product Barcode")</td>
+            <td>  <input type="date" id="exdatePicker" name="exdatePicker" /></td>
+            <td> @Html.Editor("CartoonTxte")</td>
+            <td> @Html.Editor("piece Txt")<br /></td>
+            <td> @Html.Editor("Buying txt")</td>
+            <td><input type="button" value="ADD" class="click" /></td>
+
+
+        </tr>
+    </table>
+    <br/>
+    <table>
+        <thead>
+        <tr>
+            <th>Product</th>
+            <th>Barcode</th>
+            <th>Expiry</th>
+            <th>No.of cartoons</th>
+            <th>per CArtoon quantity</th>
+            <th>Buying price</th>
+            </tr>
+            </thead>
+
+        <tbody>
+
+        </tbody>
+</table>
+
+
+
+}
+

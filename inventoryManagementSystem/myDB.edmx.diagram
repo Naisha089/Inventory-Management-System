@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="dc6a2078451d42108e1b1a11e09d7678" Name="Diagram1" ZoomLevel="97">
+        <EntityTypeShape EntityType="inventoryDBModel.category" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="inventoryDBModel.role" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="inventoryDBModel.user" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="inventoryDBModel.FK__users__u_roleID__08EA5793" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="inventoryDBModel.PIDetail" Width="1.5" PointX="9.375" PointY="4.875" />
+        <EntityTypeShape EntityType="inventoryDBModel.product" Width="1.5" PointX="5.25" PointY="1.875" />
+        <EntityTypeShape EntityType="inventoryDBModel.purchaseInvoice" Width="1.5" PointX="5.875" PointY="5.375" />
+        <EntityTypeShape EntityType="inventoryDBModel.supply" Width="1.5" PointX="3.25" PointY="5.375" />
+        <AssociationConnector Association="inventoryDBModel.FK__PIDetails__pid_p__1ED998B2" />
+        <AssociationConnector Association="inventoryDBModel.FK__PIDetails__pid_p__1FCDBCEB" />
+        <AssociationConnector Association="inventoryDBModel.FK__purchaseI__pi_su__1A14E395" />
+        <EntityTypeShape EntityType="inventoryDBModel.stock" Width="1.5" PointX="11.625" PointY="1.625" />
+        <AssociationConnector Association="inventoryDBModel.FK__stocks__st_proID__286302EC" />
+        <AssociationConnector Association="inventoryDBModel.FK__stocks__st_purch__29572725" />
+        <AssociationConnector Association="inventoryDBModel.FK__products__pro_ca__2A4B4B5E" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="sdModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="catagory">
+    <Key>
+      <PropertyRef Name="c_id" />
+    </Key>
+    <Property Name="c_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="catagory_name" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+    <Property Name="supplier_name" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="purchase">
+    <Key>
+      <PropertyRef Name="pur_id" />
+    </Key>
+    <Property Name="pur_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="purchase_product" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+    <Property Name="purchase_qnty" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+    <Property Name="purchase_price" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+    <Property Name="purchase_amount" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+    <Property Name="purchase_date" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityType Name="revenue">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="purchase_amount" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+    <Property Name="sale_amount" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+    <Property Name="revenue1" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="sale">
+    <Key>
+      <PropertyRef Name="sa_id" />
+    </Key>
+    <Property Name="sa_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="sale_product" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+    <Property Name="sale_qnty" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+    <Property Name="sale_price" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+    <Property Name="sale_amount" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+    <Property Name="sale_date" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityType Name="supplier">
+    <Key>
+      <PropertyRef Name="s_id" />
+    </Key>
+    <Property Name="s_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="supplier_name" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+    <Property Name="number" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+    <Property Name="email" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityContainer Name="sdEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="catagories" EntityType="Self.catagory" />
+    <EntitySet Name="purchases" EntityType="Self.purchase" />
+    <EntitySet Name="revenues" EntityType="Self.revenue" />
+    <EntitySet Name="sales" EntityType="Self.sale" />
+    <EntitySet Name="suppliers" EntityType="Self.supplier" />
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,210 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="inventoryDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="categories">
+    <Key>
+      <PropertyRef Name="cat_id" />
+    </Key>
+    <Property Name="cat_id" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="cat_name" Type="varchar" MaxLength="30" />
+    <Property Name="cat_status" Type="tinyint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PIDetails">
+    <Key>
+      <PropertyRef Name="pid_id" />
+    </Key>
+    <Property Name="pid_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="pid_purchaseID" Type="bigint" Nullable="false" />
+    <Property Name="pid_proID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="products">
+    <Key>
+      <PropertyRef Name="pro_id" />
+    </Key>
+    <Property Name="pro_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="pro_name" Type="varchar" MaxLength="60" Nullable="false" />
+    <Property Name="pro_barcode" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="pro_expiryDate" Type="date" />
+    <Property Name="pro_buyingPrice" Type="money" />
+    <Property Name="pro_sellingPrice" Type="money" />
+    <Property Name="pro_catID" Type="tinyint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="purchaseInvoice">
+    <Key>
+      <PropertyRef Name="pi_id" />
+    </Key>
+    <Property Name="pi_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="pi_date" Type="date" Nullable="false" />
+    <Property Name="pi_suppID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="roles">
+    <Key>
+      <PropertyRef Name="r_id" />
+    </Key>
+    <Property Name="r_id" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="r_name" Type="varchar" MaxLength="30" />
+    <Property Name="r_status" Type="tinyint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="stocks">
+    <Key>
+      <PropertyRef Name="st_id" />
+    </Key>
+    <Property Name="st_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="st_proID" Type="int" Nullable="false" />
+    <Property Name="st_proCartoons" Type="int" />
+    <Property Name="st_proPieces" Type="int" />
+    <Property Name="st_purchaseInvID" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="supplies">
+    <Key>
+      <PropertyRef Name="sup_id" />
+    </Key>
+    <Property Name="sup_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="sup_name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="sup_address" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="sup_phone" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="sup_openingBalance" Type="money" Nullable="false" />
+  </EntityType>
+  <EntityType Name="users">
+    <Key>
+      <PropertyRef Name="u_id" />
+    </Key>
+    <Property Name="u_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="u_name" Type="varchar" MaxLength="40" Nullable="false" />
+    <Property Name="u_username" Type="varchar" MaxLength="40" Nullable="false" />
+    <Property Name="u_password" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="u_phone" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="u_email" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="u_status" Type="tinyint" Nullable="false" />
+    <Property Name="u_roleID" Type="tinyint" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__PIDetails__pid_p__1ED998B2">
+    <End Role="purchaseInvoice" Type="Self.purchaseInvoice" Multiplicity="1" />
+    <End Role="PIDetails" Type="Self.PIDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="purchaseInvoice">
+        <PropertyRef Name="pi_id" />
+      </Principal>
+      <Dependent Role="PIDetails">
+        <PropertyRef Name="pid_purchaseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PIDetails__pid_p__1FCDBCEB">
+    <End Role="products" Type="Self.products" Multiplicity="1" />
+    <End Role="PIDetails" Type="Self.PIDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="products">
+        <PropertyRef Name="pro_id" />
+      </Principal>
+      <Dependent Role="PIDetails">
+        <PropertyRef Name="pid_proID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__products__pro_ca__2A4B4B5E">
+    <End Role="categories" Type="Self.categories" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="products" Type="Self.products" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="categories">
+        <PropertyRef Name="cat_id" />
+      </Principal>
+      <Dependent Role="products">
+        <PropertyRef Name="pro_catID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__purchaseI__pi_su__1A14E395">
+    <End Role="supplies" Type="Self.supplies" Multiplicity="1" />
+    <End Role="purchaseInvoice" Type="Self.purchaseInvoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="supplies">
+        <PropertyRef Name="sup_id" />
+      </Principal>
+      <Dependent Role="purchaseInvoice">
+        <PropertyRef Name="pi_suppID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__stocks__st_proID__286302EC">
+    <End Role="products" Type="Self.products" Multiplicity="1" />
+    <End Role="stocks" Type="Self.stocks" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="products">
+        <PropertyRef Name="pro_id" />
+      </Principal>
+      <Dependent Role="stocks">
+        <PropertyRef Name="st_proID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__stocks__st_purch__29572725">
+    <End Role="purchaseInvoice" Type="Self.purchaseInvoice" Multiplicity="1" />
+    <End Role="stocks" Type="Self.stocks" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="purchaseInvoice">
+        <PropertyRef Name="pi_id" />
+      </Principal>
+      <Dependent Role="stocks">
+        <PropertyRef Name="st_purchaseInvID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__users__u_roleID__08EA5793">
+    <End Role="roles" Type="Self.roles" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="users" Type="Self.users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="roles">
+        <PropertyRef Name="r_id" />
+      </Principal>
+      <Dependent Role="users">
+        <PropertyRef Name="u_roleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="st_getLoginDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="user" Type="varchar" Mode="In" />
+    <Parameter Name="pass" Type="varchar" Mode="In" />
+  </Function>
+  <EntityContainer Name="inventoryDBModelStoreContainer">
+    <EntitySet Name="categories" EntityType="Self.categories" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PIDetails" EntityType="Self.PIDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="products" EntityType="Self.products" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="purchaseInvoice" EntityType="Self.purchaseInvoice" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="roles" EntityType="Self.roles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="stocks" EntityType="Self.stocks" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="supplies" EntityType="Self.supplies" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__PIDetails__pid_p__1ED998B2" Association="Self.FK__PIDetails__pid_p__1ED998B2">
+      <End Role="purchaseInvoice" EntitySet="purchaseInvoice" />
+      <End Role="PIDetails" EntitySet="PIDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PIDetails__pid_p__1FCDBCEB" Association="Self.FK__PIDetails__pid_p__1FCDBCEB">
+      <End Role="products" EntitySet="products" />
+      <End Role="PIDetails" EntitySet="PIDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK__products__pro_ca__2A4B4B5E" Association="Self.FK__products__pro_ca__2A4B4B5E">
+      <End Role="categories" EntitySet="categories" />
+      <End Role="products" EntitySet="products" />
+    </AssociationSet>
+    <AssociationSet Name="FK__purchaseI__pi_su__1A14E395" Association="Self.FK__purchaseI__pi_su__1A14E395">
+      <End Role="supplies" EntitySet="supplies" />
+      <End Role="purchaseInvoice" EntitySet="purchaseInvoice" />
+    </AssociationSet>
+    <AssociationSet Name="FK__stocks__st_proID__286302EC" Association="Self.FK__stocks__st_proID__286302EC">
+      <End Role="products" EntitySet="products" />
+      <End Role="stocks" EntitySet="stocks" />
+    </AssociationSet>
+    <AssociationSet Name="FK__stocks__st_purch__29572725" Association="Self.FK__stocks__st_purch__29572725">
+      <End Role="purchaseInvoice" EntitySet="purchaseInvoice" />
+      <End Role="stocks" EntitySet="stocks" />
+    </AssociationSet>
+    <AssociationSet Name="FK__users__u_roleID__08EA5793" Association="Self.FK__users__u_roleID__08EA5793">
+      <End Role="roles" EntitySet="roles" />
+      <End Role="users" EntitySet="users" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

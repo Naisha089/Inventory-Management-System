@@ -1,0 +1,35 @@
+﻿@model IEnumerable<inventoryManagementSystem.Models.catagory>
+@{
+    ViewBag.Title = "DisplayCategories";
+}
+<h2>DisplayCategories</h2>
+<p>
+    @Html.ActionLink("Create New", "CreateCategories", "Categories", new { }, new { @class = "btn btn-primary" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Category name")
+        </th>
+        <th>
+            @Html.DisplayName("Supplier name")
+        </th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.catagory_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.supplier_name)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.c_id }, new { @class = "btn btn-primary" }) |
+                @Html.ActionLink("Details", "Details", new { id = item.c_id }, new { @class = "btn btn-success" }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.c_id }, new { @class = "btn btn-danger" }) |
+            </td>
+        </tr>
+    }
+</table>

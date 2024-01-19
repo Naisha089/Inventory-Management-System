@@ -1,0 +1,63 @@
+﻿@model IEnumerable<InventoryManagementSystem.product>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Products</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.pro_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.pro_barcode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.pro_expiryDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.pro_buyingPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.pro_sellingPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.category.cat_name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.pro_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.pro_barcode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.pro_expiryDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.pro_buyingPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.pro_sellingPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.category.cat_name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.pro_id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.pro_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.pro_id })
+        </td>
+    </tr>
+}
+
+</table>
